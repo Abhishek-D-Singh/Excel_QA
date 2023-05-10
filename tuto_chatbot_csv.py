@@ -27,8 +27,8 @@ if uploaded_file :
         tmp_file_path = tmp_file.name
 
 #demo_ex_loader = pd.read_excel(uploaded_file, engine = "openpyxl")
-#demo_ex_loader.to_csv("file1.csv", encoding='utf-8', index=True) 
-#loader = CSVLoader(file_path="file1.csv", encoding="utf-8")
+demo_ex_loader.to_csv("file1.csv", encoding='utf-8', index=True) 
+loader = CSVLoader(file_path="file1.csv", encoding="utf-8")
 #data = loader.load()
     
     
