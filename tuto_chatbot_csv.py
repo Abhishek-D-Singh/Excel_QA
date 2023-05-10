@@ -46,7 +46,7 @@ chain = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=
 #response = chain({"question": query})
      
 
-print(response['result'])
+#print(response['result'])
 
     #embeddings = OpenAIEmbeddings()
     #vectors = FAISS.from_documents(data, embeddings)
@@ -54,7 +54,9 @@ print(response['result'])
     #chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,model_name='gpt-3.5-turbo', openai_api_key=user_api_key),
                                                                       #retriever=vectors.as_retriever())
 
-    def conversational_chat(query):
+
+#streamlit run tuto_chatbot_csv.py
+def conversational_chat(query):
         
         result = chain({"question": query, "chat_history": st.session_state['history']})
         st.session_state['history'].append((query, result["answer"]))
@@ -93,4 +95,3 @@ print(response['result'])
                 message(st.session_state["past"][i], is_user=True, key=str(i) + '_user', avatar_style="big-smile")
                 message(st.session_state["generated"][i], key=str(i), avatar_style="thumbs")
                 
-#streamlit run tuto_chatbot_csv.py
