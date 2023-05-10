@@ -8,6 +8,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.document_loaders.csv_loader import CSVLoader
 from langchain.vectorstores import FAISS
 import tempfile
+import pandas as pd
 
 
 user_api_key = st.sidebar.text_input(
