@@ -23,7 +23,7 @@ if uploaded_file :
         tmp_file.write(uploaded_file.getvalue())
         tmp_file_path = tmp_file.name
 
-    demo_ex_loader = pd.read_excel(tmp_file_path, engine = "openpyxl")
+    demo_ex_loader = pd.read_excel(uploaded_file, engine = "openpyxl")
     loader = CSVLoader(file_path=demo_ex_loader, encoding="utf-8")
     data = loader.load()
 
