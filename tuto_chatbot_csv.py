@@ -22,7 +22,8 @@ if uploaded_file :
         tmp_file.write(uploaded_file.getvalue())
         tmp_file_path = tmp_file.name
 
-    loader = CSVLoader(file_path=tmp_file_path, encoding="utf-8")
+    demo_ex_loader = pd.read_excel(file_path=tmp_file_path)
+    loader = CSVLoader(file_path=demo_ex_loader, encoding="utf-8")
     data = loader.load()
 
     embeddings = OpenAIEmbeddings()
