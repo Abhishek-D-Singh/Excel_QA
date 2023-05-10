@@ -72,7 +72,7 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
         st.session_state['past'] = ["Hey ! 👋"]    
         
-    #container for the chat history
+#container for the chat history
     response_container = st.container()
     #container for the user's text input
     container = st.container()
