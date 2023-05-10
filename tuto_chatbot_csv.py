@@ -31,10 +31,9 @@ if uploaded_file :
     loader = CSVLoader(file_path="file1.csv", encoding="utf-8")
     data = loader.load()
     
-    index_creator = VectorstoreIndexCreator()
-    docsearch = index_creator.from_loaders([loader])
-     
-#WARNING:chromadb:Using embedded DuckDB without persistence: data will be transient
+    
+index_creator = VectorstoreIndexCreator()
+docsearch = index_creator.from_loaders([loader])
 
 # Create a question-answering chain using the index
 chain = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=docsearch.vectorstore.as_retriever(), input_key="question")
