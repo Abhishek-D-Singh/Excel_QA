@@ -6,6 +6,9 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.document_loaders.csv_loader import CSVLoader
+from langchain.indexes import VectorstoreIndexCreator
+from langchain.chains import RetrievalQA
+from langchain.llms import OpenAI
 from langchain.vectorstores import FAISS
 import tempfile
 import pandas as pd
@@ -27,12 +30,29 @@ if uploaded_file :
     demo_ex_loader.to_csv("file1.csv", encoding='utf-8', index=False) 
     loader = CSVLoader(file_path="file1.csv", encoding="utf-8")
     data = loader.load()
+    
+    index_creator = VectorstoreIndexCreator()
+    docsearch = index_creator.from_loaders([loader])
+     
+#WARNING:chromadb:Using embedded DuckDB without persistence: data will be transient
 
-    embeddings = OpenAIEmbeddings()
-    vectors = FAISS.from_documents(data, embeddings)
+# Create a question-answering chain using the index
+chain = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=docsearch.vectorstore.as_retriever(), input_key="question")
 
-    chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,model_name='gpt-3.5-turbo', openai_api_key=user_api_key),
-                                                                      retriever=vectors.as_retriever())
+     
+
+# Pass a query to the chain
+#query = "Do you have a column called age?"
+#response = chain({"question": query})
+     
+
+print(response['result'])
+
+    #embeddings = OpenAIEmbeddings()
+    #vectors = FAISS.from_documents(data, embeddings)
+
+    #chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,model_name='gpt-3.5-turbo', openai_api_key=user_api_key),
+                                                                      #retriever=vectors.as_retriever())
 
     def conversational_chat(query):
         
