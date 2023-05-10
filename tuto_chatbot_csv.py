@@ -66,10 +66,10 @@ def conversational_chat(query):
 if 'history' not in st.session_state:
         st.session_state['history'] = []
 
-    if 'generated' not in st.session_state:
+if 'generated' not in st.session_state:
         st.session_state['generated'] = ["Hello ! Ask me anything about " + uploaded_file.name + " 🤗"]
 
-    if 'past' not in st.session_state:
+if 'past' not in st.session_state:
         st.session_state['past'] = ["Hey ! 👋"]    
         
     #container for the chat history
