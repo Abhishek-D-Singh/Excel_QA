@@ -15,14 +15,14 @@ user_api_key = st.sidebar.text_input(
     placeholder="Paste your openAI API key, sk-",
     type="password")
 
-uploaded_file = st.sidebar.file_uploader("upload", type="csv")
+uploaded_file = st.sidebar.file_uploader("upload", type=["csv","xlsx"])
 
 if uploaded_file :
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
         tmp_file.write(uploaded_file.getvalue())
         tmp_file_path = tmp_file.name
 
-    demo_ex_loader = pd.read_excel(file_path=tmp_file_path)
+    demo_ex_loader = pd.read_excel(tmp_file_path)
     loader = CSVLoader(file_path=demo_ex_loader, encoding="utf-8")
     data = loader.load()
 
