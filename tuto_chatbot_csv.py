@@ -54,10 +54,8 @@ chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,m
 
 #streamlit run tuto_chatbot_csv.py
 def conversational_chat(query):
-        
         result = chain({"question": query, "chat_history": st.session_state['history']})
         st.session_state['history'].append((query, result["answer"]))
-        
         return result["answer"]
     
 if 'history' not in st.session_state:
