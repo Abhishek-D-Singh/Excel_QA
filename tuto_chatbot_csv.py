@@ -29,7 +29,7 @@ if uploaded_file :
 demo_ex_loader = pd.read_excel(uploaded_file, engine = "openpyxl")
 demo_ex_loader.to_csv("file1.csv", encoding='utf-8', index=True) 
 loader = CSVLoader(file_path="file1.csv", encoding="utf-8")
-#data = loader.load()
+data = loader.load()
     
     
 index_creator = VectorstoreIndexCreator()
@@ -41,16 +41,16 @@ chain = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=
      
 
 # Pass a query to the chain
-#query = "Do you have a column called age?"
-#response = chain({"question": query})
+query = "Do you have a column called age?"
+response = chain({"question": query})
      
 
-#print(response['result'])
+print(response['result'])
 
-    #embeddings = OpenAIEmbeddings()
-    #vectors = FAISS.from_documents(data, embeddings)
+    embeddings = OpenAIEmbeddings()
+    vectors = FAISS.from_documents(data, embeddings)
 
-    #chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,model_name='gpt-3.5-turbo', openai_api_key=user_api_key),
+    chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,model_name='gpt-3.5-turbo', openai_api_key=user_api_key),
                                                                       #retriever=vectors.as_retriever())
 
 
