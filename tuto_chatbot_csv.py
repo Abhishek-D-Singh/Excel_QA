@@ -91,7 +91,7 @@ if uploaded_file:
     #embeddings = OpenAIEmbeddings()
     #vectors = FAISS.from_documents(data, embeddings)
     #chain = ConversationalRetrievalChain.from_llm(llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=user_api_key),
-                                                 retriever=vectors.as_retriever())
+                                                 #retriever=vectors.as_retriever())
 
     def conversational_chat(query):
         result = chain({"question": query, "chat_history": st.session_state['history']})
