@@ -26,7 +26,7 @@ if uploaded_file:
 
     demo_ex_loader = pd.read_excel(uploaded_file, engine="openpyxl")
     demo_ex_loader.to_csv("file1.csv", encoding='utf-8', index=True)
-    loader = pd.read_csv(tmp_file_path, encoding="latin1")
+    loader = pd.read_csv(tmp_file_path, encoding="latin1", error_bad_lines=False)
     #loader = pd.read_csv(tmp_file_path, encoding="utf-8")
 
     index_creator = VectorstoreIndexCreator()
