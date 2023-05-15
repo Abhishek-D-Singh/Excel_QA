@@ -18,8 +18,17 @@ user_api_key = st.sidebar.text_input(
     type="password")
 
 uploaded_file = st.sidebar.file_uploader("Upload", type=["csv", "xlsx"])
-
 if uploaded_file:
+    # Read Excel file
+    if uploaded_file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        df = pd.read_excel(uploaded_file, engine="openpyxl")
+    # Convert Excel to CSV
+    elif uploaded_file.type == "application/vnd.ms-excel":
+        df = pd.read_csv(uploaded_file)
+    else:
+        st.error("Unsupported file format. Please upload a CSV or Excel file.")
+        st.stop()
+"""if uploaded_file:
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
         tmp_file.write(uploaded_file.getvalue())
         tmp_file_path = tmp_file.name
@@ -27,7 +36,7 @@ if uploaded_file:
     demo_ex_loader = pd.read_excel(uploaded_file, engine="openpyxl")
     demo_ex_loader.to_csv("file1.csv", encoding='utf-8', index=True)
     loader = pd.read_csv(tmp_file_path, encoding="latin1", error_bad_lines=False)
-    #loader = pd.read_csv(tmp_file_path, encoding="utf-8")
+    #loader = pd.read_csv(tmp_file_path, encoding="utf-8")"""
 
     index_creator = VectorstoreIndexCreator()
     docsearch = index_creator.from_loaders([loader])
