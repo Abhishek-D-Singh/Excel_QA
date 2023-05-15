@@ -38,8 +38,8 @@ if uploaded_file:
     loader = pd.read_csv(tmp_file_path, encoding="latin1", error_bad_lines=False)
     #loader = pd.read_csv(tmp_file_path, encoding="utf-8")"""
 
-    index_creator = VectorstoreIndexCreator()
-    docsearch = index_creator.from_loaders([loader])
+   index_creator = VectorstoreIndexCreator()
+   docsearch = index_creator.from_loaders([loader])
 
     # Create a question-answering chain using the index
     chain = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=docsearch.vectorstore.as_retriever(), input_key="question")
