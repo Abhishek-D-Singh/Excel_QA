@@ -53,19 +53,19 @@ chain = ConversationalRetrievalChain.from_llm(llm = ChatOpenAI(temperature=0.0,m
 
 
 #streamlit run tuto_chatbot_csv.py
-def conversational_chat(query):
-        result = chain({"question": query, "chat_history": st.session_state['history']})
-        st.session_state['history'].append((query, result["answer"]))
-        return result["answer"]
+    def conversational_chat(query):
+            result = chain({"question": query, "chat_history": st.session_state['history']})
+            st.session_state['history'].append((query, result["answer"]))
+            return result["answer"]
     
-if 'history' not in st.session_state:
-        st.session_state['history'] = []
+    if 'history' not in st.session_state:
+            st.session_state['history'] = []
 
-if 'generated' not in st.session_state:
-        st.session_state['generated'] = ["Hello ! Ask me anything about " + uploaded_file.name + " 🤗"]
+    if 'generated' not in st.session_state:
+            st.session_state['generated'] = ["Hello ! Ask me anything about " + uploaded_file.name + " 🤗"]
 
-if 'past' not in st.session_state:
-        st.session_state['past'] = ["Hey ! 👋"]    
+    if 'past' not in st.session_state:
+            st.session_state['past'] = ["Hey ! 👋"]    
         
 #container for the chat history
 response_container = st.container()
