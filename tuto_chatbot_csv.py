@@ -27,7 +27,7 @@ if uploaded_file:
         st.stop()
 
     index_creator = VectorstoreIndexCreator()
-    docsearch = index_creator.from_loaders([loader])
+    docsearch = index_creator.from_loaders([df])
 
     # Create a question-answering chain using the index
     chain = RetrievalQA.from_chain_type(llm=OpenAI(), chain_type="stuff", retriever=docsearch.vectorstore.as_retriever(), input_key="question")
